@@ -25,31 +25,31 @@ public class SeleniumComponent {
     public SeleniumComponent() {
         super();
 
-        this.drivers = Maps.newHashMap();
+        drivers = Maps.newHashMap();
     }
 
     // API
 
     public final WebDriver getDriver(final DriverType driverType) {
-        if (this.drivers.get(driverType) != null) {
-            return this.drivers.get(driverType);
+        if (drivers.get(driverType) != null) {
+            return drivers.get(driverType);
         }
 
         WebDriver theDriver = null;
         switch (driverType) {
         case FIREFOX:
-            this.logger.info("Using Firefox Driver");
+            logger.info("Using Firefox Driver");
             theDriver = initFirefoxDriver();
             break;
         case HTMLUNIT:
-            this.logger.info("Using HtmlUnit Driver");
+            logger.info("Using HtmlUnit Driver");
             theDriver = initHtmlUnitDriver();
             break;
         default:
             break;
         }
 
-        this.drivers.put(driverType, theDriver);
+        drivers.put(driverType, theDriver);
         return theDriver;
     }
 
@@ -73,7 +73,7 @@ public class SeleniumComponent {
     }
 
     private final WebDriver initHtmlUnitDriver() {
-        final HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_17);
+        final HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_24);
         driver.setJavascriptEnabled(true);
         driver.manage().timeouts().implicitlyWait(750, TimeUnit.MILLISECONDS);
         driver.manage().timeouts().setScriptTimeout(1500, TimeUnit.MILLISECONDS);
